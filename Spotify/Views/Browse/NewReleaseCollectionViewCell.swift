@@ -29,7 +29,7 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
     private let numberOfTracksLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 18, weight: .thin)
+        label.font = .systemFont(ofSize: 18, weight: .light)
         return label
     }()
     
