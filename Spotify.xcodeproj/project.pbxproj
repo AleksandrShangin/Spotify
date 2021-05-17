@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		DC40D5B2A6CB54730D8DDF85 /* Pods_Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 581EBB9BD267DDC8124BAAA0 /* Pods_Spotify.framework */; };
+		FA2B86952651980C00993280 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B86942651980C00993280 /* AlbumViewController.swift */; };
+		FA2B8697265248C200993280 /* AlbumDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B8696265248C200993280 /* AlbumDetailsResponse.swift */; };
+		FA2B869926525D2100993280 /* PlaylistDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B869826525D2100993280 /* PlaylistDetailsResponse.swift */; };
 		FA39AA5D263C642A0086C2CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39AA5C263C642A0086C2CD /* AppDelegate.swift */; };
 		FA39AA5F263C642A0086C2CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39AA5E263C642A0086C2CD /* SceneDelegate.swift */; };
 		FA39AA61263C642A0086C2CD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39AA60263C642A0086C2CD /* HomeViewController.swift */; };
@@ -51,6 +54,9 @@
 		581EBB9BD267DDC8124BAAA0 /* Pods_Spotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8993ED8FB5AA40259ECCD268 /* Pods-Spotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotify.debug.xcconfig"; path = "Target Support Files/Pods-Spotify/Pods-Spotify.debug.xcconfig"; sourceTree = "<group>"; };
 		DA8859438CF500AC4C64D0FA /* Pods-Spotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotify.release.xcconfig"; path = "Target Support Files/Pods-Spotify/Pods-Spotify.release.xcconfig"; sourceTree = "<group>"; };
+		FA2B86942651980C00993280 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
+		FA2B8696265248C200993280 /* AlbumDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsResponse.swift; sourceTree = "<group>"; };
+		FA2B869826525D2100993280 /* PlaylistDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailsResponse.swift; sourceTree = "<group>"; };
 		FA39AA59263C642A0086C2CD /* Spotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA39AA5C263C642A0086C2CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA39AA5E263C642A0086C2CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +191,8 @@
 				FA5233ED264AEDB700CD2B92 /* FeaturedPlaylistResponse.swift */,
 				FA5233EF264B046600CD2B92 /* RecommendedGenresResponse.swift */,
 				FA5233F1264BCAAA00CD2B92 /* RecommendationsResponse.swift */,
+				FA2B8696265248C200993280 /* AlbumDetailsResponse.swift */,
+				FA2B869826525D2100993280 /* PlaylistDetailsResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -252,6 +260,7 @@
 				FAF77ECF263C6B2D0091C9CB /* PlayerViewController.swift */,
 				FAF77ED2263C6B520091C9CB /* PlaylistViewController.swift */,
 				FAF77ED5263C6B7F0091C9CB /* SearchResultsViewController.swift */,
+				FA2B86942651980C00993280 /* AlbumViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -381,8 +390,10 @@
 				FA5233F0264B046600CD2B92 /* RecommendedGenresResponse.swift in Sources */,
 				FAE930C32646C71400BD3DA4 /* AuthResponse.swift in Sources */,
 				FAF77ED9263C6BC70091C9CB /* AuthManager.swift in Sources */,
+				FA2B86952651980C00993280 /* AlbumViewController.swift in Sources */,
 				FA5233EC264AE50B00CD2B92 /* APIImage.swift in Sources */,
 				FAF77ED6263C6B7F0091C9CB /* SearchResultsViewController.swift in Sources */,
+				FA2B869926525D2100993280 /* PlaylistDetailsResponse.swift in Sources */,
 				FA5233EA264AD78B00CD2B92 /* NewReleasesResponse.swift in Sources */,
 				FAF77EC7263C6ACF0091C9CB /* WelcomeViewController.swift in Sources */,
 				FAF77ECD263C6B0A0091C9CB /* ProfileViewController.swift in Sources */,
@@ -390,6 +401,7 @@
 				FAF77EDF263C6C030091C9CB /* HapticsManager.swift in Sources */,
 				FAF77EE5263C6C630091C9CB /* AudioTrack.swift in Sources */,
 				FA39AA61263C642A0086C2CD /* HomeViewController.swift in Sources */,
+				FA2B8697265248C200993280 /* AlbumDetailsResponse.swift in Sources */,
 				FAF77EC3263C6ABB0091C9CB /* AuthViewController.swift in Sources */,
 				FA39AA5D263C642A0086C2CD /* AppDelegate.swift in Sources */,
 				FAF77EEB263C6C910091C9CB /* UserProfile.swift in Sources */,
