@@ -20,9 +20,7 @@ class PlaylistViewController: UIViewController {
         // Section
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [
-            NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1)),
-                                                        elementKind: UICollectionView.elementKindSectionHeader,
-                                                        alignment: .top)
+            NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         ]
         return section
     }))
@@ -55,9 +53,11 @@ class PlaylistViewController: UIViewController {
                 case .success(let model):
                     // RecommendedTrackCellViewModel
                     self?.viewModels = model.tracks.items.compactMap({
-                        RecommendedTrackCellViewModel(name: $0.track.name,
-                                                      artistName: $0.track.artists.first?.name ?? "-",
-                                                      artworkURL: URL(string: $0.track.album?.images.first?.url ?? ""))
+                        RecommendedTrackCellViewModel(
+                            name: $0.track.name,
+                            artistName: $0.track.artists.first?.name ?? "-",
+                            artworkURL: URL(string: $0.track.album?.images.first?.url ?? "")
+                        )
                     })
                     self?.collectionView.reloadData()
                 case .failure(let error):
