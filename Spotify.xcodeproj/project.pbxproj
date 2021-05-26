@@ -37,6 +37,8 @@
 		FA8F6BBD2649A828004D87F5 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F6BBC2649A828004D87F5 /* SettingsModel.swift */; };
 		FAA5AFF4265C1BFC0065199E /* CategoryCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5AFF3265C1BFC0065199E /* CategoryCollectionViewCellViewModel.swift */; };
 		FAA5AFF6265C251F0065199E /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5AFF5265C251F0065199E /* CategoryViewController.swift */; };
+		FAA5AFF8265E445F0065199E /* SearchResultsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5AFF7265E445E0065199E /* SearchResultsResponse.swift */; };
+		FAA5AFFA265E75CD0065199E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA5AFF9265E75CC0065199E /* SearchResult.swift */; };
 		FAE930BB2646C41300BD3DA4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE930BA2646C41300BD3DA4 /* Constants.swift */; };
 		FAE930C32646C71400BD3DA4 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE930C22646C71400BD3DA4 /* AuthResponse.swift */; };
 		FAF77EB7263C69CD0091C9CB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF77EB6263C69CD0091C9CB /* TabBarViewController.swift */; };
@@ -94,6 +96,8 @@
 		FA8F6BBC2649A828004D87F5 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		FAA5AFF3265C1BFC0065199E /* CategoryCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		FAA5AFF5265C251F0065199E /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		FAA5AFF7265E445E0065199E /* SearchResultsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsResponse.swift; sourceTree = "<group>"; };
+		FAA5AFF9265E75CC0065199E /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		FAE930BA2646C41300BD3DA4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FAE930C22646C71400BD3DA4 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		FAF77EB6263C69CD0091C9CB /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarViewController.swift; path = Spotify/Controllers/CoreTabs/TabBarViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -216,6 +220,8 @@
 				FA2B8696265248C200993280 /* AlbumDetailsResponse.swift */,
 				FA2B869826525D2100993280 /* PlaylistDetailsResponse.swift */,
 				FA407DA2265AE2F700199BFE /* AllCategoriesResponse.swift */,
+				FAA5AFF7265E445E0065199E /* SearchResultsResponse.swift */,
+				FAA5AFF9265E75CC0065199E /* SearchResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -441,11 +447,13 @@
 				FAF77EEE263C89DD0091C9CB /* Extensions.swift in Sources */,
 				FA407DA3265AE2F700199BFE /* AllCategoriesResponse.swift in Sources */,
 				FAF77EBE263C6A5A0091C9CB /* LibraryViewController.swift in Sources */,
+				FAA5AFFA265E75CD0065199E /* SearchResult.swift in Sources */,
 				FA82E5682656C8A0008AE398 /* PlaylistHeaderViewModel.swift in Sources */,
 				FAF77EE8263C6C7D0091C9CB /* Artist.swift in Sources */,
 				FA407D9D265807FC00199BFE /* AlbumTrackCollectionViewCell.swift in Sources */,
 				FAF77ED3263C6B520091C9CB /* PlaylistViewController.swift in Sources */,
 				FA39AA5F263C642A0086C2CD /* SceneDelegate.swift in Sources */,
+				FAA5AFF8265E445F0065199E /* SearchResultsResponse.swift in Sources */,
 				FA5233EE264AEDB700CD2B92 /* FeaturedPlaylistResponse.swift in Sources */,
 				FAF77ED0263C6B2D0091C9CB /* PlayerViewController.swift in Sources */,
 				FAA5AFF6265C251F0065199E /* CategoryViewController.swift in Sources */,
