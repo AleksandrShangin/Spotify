@@ -13,6 +13,8 @@ class PlaylistViewController: UIViewController {
     
     private var viewModels = [RecommendedTrackCellViewModel]()
     
+    private var tracks = [AudioTrack]()
+    
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { (_, _) -> NSCollectionLayoutSection? in
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 2, bottom: 1, trailing: 2)
@@ -51,6 +53,7 @@ class PlaylistViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let model):
+                    self?.tracks = model.tracks.items.compactMap({ $0.track })
                     // RecommendedTrackCellViewModel
                     self?.viewModels = model.tracks.items.compactMap({
                         RecommendedTrackCellViewModel(
@@ -124,7 +127,8 @@ extension PlaylistViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         // Play song
-
+        let track = tracks[indexPath.row]
+        PlaybackPresenter.shared.startPlayback(from: self, track: track)
     }
     
 }
@@ -133,7 +137,7 @@ extension PlaylistViewController: UICollectionViewDataSource, UICollectionViewDe
 
 extension PlaylistViewController: PlaylistHeaderCollectionReusableViewDelegate {
     func playlistHeaderCollectionReusableViewDidTapPlayAll(_ header: PlaylistHeaderCollectionReusableView) {
-        print("Tapped")
+        PlaybackPresenter.shared.startPlayback(from: self, tracks: tracks)
     }
     
     
