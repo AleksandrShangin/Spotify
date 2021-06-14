@@ -7,6 +7,8 @@
 
 import UIKit
 import SDWebImage
+import ColorCompatibility
+
 
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -25,7 +27,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         title = "Profile"
         fetchProfile()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorCompatibility.systemBackground
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
@@ -82,7 +84,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let label = UILabel(frame: .zero)
         label.text = "Failed to load profile."
         label.sizeToFit()
-        label.textColor = .secondaryLabel
+        label.textColor = ColorCompatibility.secondaryLabel
         view.addSubview(label)
         label.center = view.center
     }

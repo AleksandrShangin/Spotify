@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import ColorCompatibility
 
-class CategoryViewController: UIViewController {
+
+
+final class CategoryViewController: UIViewController {
 
     let category: Category
     
     private var playlists = [Playlist]()
+    
     
     private let collectionView: UICollectionView = UICollectionView(
         frame: .zero,
@@ -49,7 +53,7 @@ class CategoryViewController: UIViewController {
         title = category.name
         view.addSubview(collectionView)
         view.backgroundColor = .systemBackground
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = ColorCompatibility.systemBackground
         collectionView.register(FeaturedPlaylistCollectionViewCell.self,
                                 forCellWithReuseIdentifier: FeaturedPlaylistCollectionViewCell.identifier)
         collectionView.dataSource = self

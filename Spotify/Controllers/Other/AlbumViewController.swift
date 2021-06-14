@@ -6,14 +6,21 @@
 //
 
 import UIKit
+import ColorCompatibility
 
-class AlbumViewController: UIViewController {
 
+final class AlbumViewController: UIViewController {
+
+    // MARK: - Properties
+    
     private let album: Album
     
     private var viewModels = [AlbumCollectionViewCellViewModel]()
     
     private var tracks = [AudioTrack]()
+    
+    
+    // MARK: - UI
     
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { (_, _) -> NSCollectionLayoutSection? in
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
@@ -28,6 +35,8 @@ class AlbumViewController: UIViewController {
     }))
     
     
+    // MARK: - Init
+    
     init(album: Album) {
         self.album = album
         super.init(nibName: nil, bundle: nil)
@@ -38,17 +47,19 @@ class AlbumViewController: UIViewController {
     }
     
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = album.name
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorCompatibility.systemBackground
         view.addSubview(collectionView)
         collectionView.register(AlbumTrackCollectionViewCell.self,
                                 forCellWithReuseIdentifier: AlbumTrackCollectionViewCell.identifier)
         collectionView.register(PlaylistHeaderCollectionReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: PlaylistHeaderCollectionReusableView.identifier)
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = ColorCompatibility.systemBackground
         collectionView.dataSource = self
         collectionView.delegate = self
         APICaller.shared.getAlbumDetails(for: album) { [weak self] (result) in
@@ -63,7 +74,6 @@ class AlbumViewController: UIViewController {
                         )
                     })
                     self?.collectionView.reloadData()
-                    
                 case .failure(let error):
                     print(error)
                 }
@@ -79,6 +89,8 @@ class AlbumViewController: UIViewController {
 
 }
 
+
+// MARK: - CollectionView Methods
 
 extension AlbumViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -117,7 +129,8 @@ extension AlbumViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         // Play song
-        let track = tracks[indexPath.row]
+        var track = tracks[indexPath.row]
+        track.album = self.album
         PlaybackPresenter.shared.startPlayback(from: self, track: track)
     }
     
@@ -125,9 +138,16 @@ extension AlbumViewController: UICollectionViewDataSource, UICollectionViewDeleg
 }
 
 
+// MARK: - Extension for PlaylistHeaderCollectionReusableViewDelegate
+
 extension AlbumViewController: PlaylistHeaderCollectionReusableViewDelegate {
     func playlistHeaderCollectionReusableViewDidTapPlayAll(_ header: PlaylistHeaderCollectionReusableView) {
-        PlaybackPresenter.shared.startPlayback(from: self, tracks: tracks)
+        let trackskWithAlbum: [AudioTrack] = tracks.compactMap({
+            var track = $0
+            track.album = self.album
+            return track
+        })
+        PlaybackPresenter.shared.startPlayback(from: self, tracks: trackskWithAlbum)
     }
     
     

@@ -7,6 +7,8 @@
 
 import UIKit
 import SDWebImage
+import ColorCompatibility
+
 
 
 protocol PlayerViewControllerDelegate: AnyObject {
@@ -18,23 +20,30 @@ protocol PlayerViewControllerDelegate: AnyObject {
 
 
 
-class PlayerViewController: UIViewController {
+final class PlayerViewController: UIViewController {
 
+    // MARK: - Propeties
+    
     weak var dataSource: PlayerDataSource?
     weak var delegate: PlayerViewControllerDelegate?
+    
+    
+    // MARK: - UI
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .systemBlue
         return imageView
     }()
     
     private let controlsView = PlayerControlsView()
     
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorCompatibility.systemBackground
         view.addSubview(imageView)
         view.addSubview(controlsView)
         configureBarButtons()
@@ -54,6 +63,7 @@ class PlayerViewController: UIViewController {
     }
     
     
+    @available(iOS 13.0, *)
     private func configureBarButtons() {
         let leftBarButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didTapClose))
         navigationItem.leftBarButtonItem = leftBarButton
@@ -69,9 +79,16 @@ class PlayerViewController: UIViewController {
         // Actions
         
     }
+    
+    func refreshUI() {
+        configure()
+    }
 
 }
 
+
+
+// MARK: - Extension for PlayerControlsViewDelegate
 
 extension PlayerViewController: PlayerControlsViewDelegate {
     func playerControlsViewDidTapPlayPause(_ playerControlsView: PlayerControlsView) {

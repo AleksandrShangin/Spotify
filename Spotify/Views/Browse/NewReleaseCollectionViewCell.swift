@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import ColorCompatibility
 
 
 class NewReleaseCollectionViewCell: UICollectionViewCell {
@@ -14,7 +15,11 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
     
     private let albumCoverImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "photo")
+        if #available(iOS 13.0, *) {
+            imageView.image = UIImage(systemName: "photo")
+        } else {
+            // Fallback on earlier versions
+        }
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -42,7 +47,7 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .secondarySystemBackground
+        contentView.backgroundColor = ColorCompatibility.secondarySystemBackground
         contentView.clipsToBounds = true
         contentView.addSubview(albumCoverImageView)
         contentView.addSubview(albumNameLabel)

@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import ColorCompatibility
 
 
 protocol PlaylistHeaderCollectionReusableViewDelegate: AnyObject {
@@ -15,9 +16,15 @@ protocol PlaylistHeaderCollectionReusableViewDelegate: AnyObject {
 
 
 final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
+    
+    // MARK: - Properties
+    
     static let identifier = "PlaylistHeaderCollectionReusableView"
     
     weak var delegate: PlaylistHeaderCollectionReusableViewDelegate?
+    
+    
+    // MARK: - UI
     
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -27,7 +34,7 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .secondaryLabel
+        label.textColor = ColorCompatibility.secondaryLabel
         label.font = .systemFont(ofSize: 18, weight: .regular)
         label.numberOfLines = 2
         return label
@@ -35,7 +42,7 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     
     private let ownerLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .secondaryLabel
+        label.textColor = ColorCompatibility.secondaryLabel
         label.font = .systemFont(ofSize: 18, weight: .light)
         return label
     }()
@@ -43,14 +50,23 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     private let playlistImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(systemName: "photo")
+        if #available(iOS 13.0, *) {
+            imageView.image = UIImage(systemName: "photo")
+        } else {
+            // Fallback on earlier versions
+        }
         return imageView
     }()
     
     private let playAllButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemGreen
-        let image = UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .regular))
+        var image = UIImage()
+        if #available(iOS 13.0, *) {
+            image = UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .regular)) ?? UIImage()
+        } else {
+            // Fallback on earlier versions
+        }
         button.setImage(image, for: .normal)
         button.tintColor = .white
         button.layer.cornerRadius = 30
@@ -58,19 +74,18 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         return button
     }()
     
+    
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = ColorCompatibility.systemBackground
         addSubview(nameLabel)
         addSubview(descriptionLabel)
         addSubview(ownerLabel)
         addSubview(playlistImageView)
         addSubview(playAllButton)
         playAllButton.addTarget(self, action: #selector(didTapPlayAll), for: .touchUpInside)
-    }
-    
-    @objc private func didTapPlayAll() {
-        delegate?.playlistHeaderCollectionReusableViewDidTapPlayAll(self)
     }
     
     required init?(coder: NSCoder) {
@@ -93,6 +108,13 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         descriptionLabel.text = viewModel.description
         ownerLabel.text = viewModel.ownerName
         playlistImageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
+    }
+    
+    
+    // MARK: - Actions
+    
+    @objc private func didTapPlayAll() {
+        delegate?.playlistHeaderCollectionReusableViewDidTapPlayAll(self)
     }
     
 }

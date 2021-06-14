@@ -7,8 +7,13 @@
 
 import UIKit
 
+
+
+@available(iOS 14.0, *)
 class WelcomeViewController: UIViewController {
 
+    // MARK: - UI
+    
     private let signInButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
@@ -18,9 +23,11 @@ class WelcomeViewController: UIViewController {
         return button
     }()
     
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = "Spotify"
         view.backgroundColor = .systemGreen
         view.addSubview(signInButton)
@@ -34,6 +41,9 @@ class WelcomeViewController: UIViewController {
                                     width: view.width-40,
                                     height: 50)
     }
+    
+    
+    // MARK: - Private Methods
     
     @objc private func didTapSignIn() {
         let vc = AuthViewController()

@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import ColorCompatibility
+
+
 
 class TitleHeaderCollectionReusableView: UICollectionReusableView {
     static let identifier = "TitleHeaderCollectionReusableView"
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.textColor = ColorCompatibility.label
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 22, weight: .regular)
         return label
@@ -20,7 +23,7 @@ class TitleHeaderCollectionReusableView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = ColorCompatibility.systemBackground
         addSubview(titleLabel)
     }
     

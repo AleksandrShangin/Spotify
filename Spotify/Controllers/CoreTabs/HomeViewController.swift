@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ColorCompatibility
 
 
 enum BrowseSectionType {
@@ -26,29 +27,38 @@ enum BrowseSectionType {
 }
 
 
-class HomeViewController: UIViewController {
 
+final class HomeViewController: UIViewController {
+    
+    // MARK: - Properties
+    
     private var newAlbums: [Album] = []
     private var playlists: [Playlist] = []
     private var tracks: [AudioTrack] = []
+    
+    private var sections = [BrowseSectionType]()
+    
+    
+    // MARK: - UI
+    
+    private let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.tintColor = ColorCompatibility.label
+        spinner.hidesWhenStopped = true
+        return spinner
+    }()
     
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout { sectionIndex, _ -> NSCollectionLayoutSection? in
         return HomeViewController.createSectionLayout(section: sectionIndex)
     })
     
-    private let spinner: UIActivityIndicatorView = {
-        let spinner = UIActivityIndicatorView()
-        spinner.tintColor = .label
-        spinner.hidesWhenStopped = true
-        return spinner
-    }()
     
-    private var sections = [BrowseSectionType]()
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Home"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorCompatibility.systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(didTapSettings))
         
         configureCollectionView()
@@ -74,10 +84,11 @@ class HomeViewController: UIViewController {
                                 withReuseIdentifier: TitleHeaderCollectionReusableView.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = ColorCompatibility.systemBackground
     }
     
     
+    // MARK: - Private Methods
     
     private func fetchData() {
         let group = DispatchGroup()
@@ -174,11 +185,13 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    
-    
 
 }
 
+
+
+
+// MARK: - Extension for CollectionView Methods
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     

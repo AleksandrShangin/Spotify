@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ColorCompatibility
 
 
 protocol PlayerControlsViewDelegate: AnyObject {
@@ -48,13 +49,13 @@ final class PlayerControlsView: UIView {
         label.text = "Artist Name"
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 18, weight: .regular)
-        label.textColor = .secondaryLabel
+        label.textColor = ColorCompatibility.secondaryLabel
         return label
     }()
     
     private let backButton: UIButton = {
         let button = UIButton()
-        button.tintColor = .label
+        button.tintColor = ColorCompatibility.label
         let image = UIImage(systemName: "backward.fill",
                             withConfiguration: UIImage.SymbolConfiguration(pointSize: 34, weight: .regular))
         button.setImage(image, for: .normal)
@@ -63,18 +64,28 @@ final class PlayerControlsView: UIView {
     
     private let forwardButton: UIButton = {
         let button = UIButton()
-        button.tintColor = .label
-        let image = UIImage(systemName: "forward.fill",
-                            withConfiguration: UIImage.SymbolConfiguration(pointSize: 34, weight: .regular))
+        button.tintColor = ColorCompatibility.label
+        var image = UIImage()
+        if #available(iOS 13.0, *) {
+            image = UIImage(systemName: "forward.fill",
+                                withConfiguration: UIImage.SymbolConfiguration(pointSize: 34, weight: .regular))!
+        } else {
+            // Fallback on earlier versions
+        }
         button.setImage(image, for: .normal)
         return button
     }()
     
     private let playPauseButton: UIButton = {
         let button = UIButton()
-        button.tintColor = .label
-        let image = UIImage(systemName: "pause.fill",
-                            withConfiguration: UIImage.SymbolConfiguration(pointSize: 34, weight: .regular))
+        button.tintColor = ColorCompatibility.label
+        var image = UIImage()
+        if #available(iOS 13.0, *) {
+            image = UIImage(systemName: "pause.fill",
+                                withConfiguration: UIImage.SymbolConfiguration(pointSize: 34, weight: .regular))!
+        } else {
+            // Fallback on earlier versions
+        }
         button.setImage(image, for: .normal)
         return button
     }()
@@ -140,7 +151,8 @@ final class PlayerControlsView: UIView {
         let pause = UIImage(systemName: "pause.fill",
                             withConfiguration: UIImage.SymbolConfiguration(pointSize: 34, weight: .regular))
         let play = UIImage(systemName: "play.fill",
-                            withConfiguration: UIImage.SymbolConfiguration(pointSize: 34, weight: .regular))
+                           withConfiguration: UIImage.SymbolConfiguration(pointSize: 34, weight: .regular))
+        
         playPauseButton.setImage(isPlaying ? pause : play, for: .normal)
     }
     

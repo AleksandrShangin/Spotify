@@ -11,6 +11,7 @@ import Foundation
 
 final class APICaller {
     
+    
     static let shared = APICaller()
     
     private init() {}
@@ -22,6 +23,11 @@ final class APICaller {
     enum APIError: Error {
         case failedToGetData
     }
+    
+//    enum Endpoint {
+//        case albumDetails
+//        case categories
+//    }
     
     
     
@@ -86,6 +92,7 @@ final class APICaller {
         }
     }
 
+    
     // MARK: - Browse
     
     public func getNewReleases(completion: @escaping (Result<NewReleasesResponse, Error>) -> Void) {
@@ -167,6 +174,7 @@ final class APICaller {
         }
     }
     
+    
     // MARK: - Category
     
     public func getCategories(completion: @escaping (Result<[Category], Error>) -> Void) {
@@ -207,9 +215,8 @@ final class APICaller {
         }
     }
     
+    
     // MARK: - Search
-    
-    
     
     public func search(with query: String, completion: @escaping (Result<[SearchResult], Error>) -> Void) {
         createRequest(with: URL(string: Constants.baseAPIURL + "/search?type=album,artist,playlist,track&q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"), type: .GET) { (request) in
@@ -220,7 +227,6 @@ final class APICaller {
                     return
                 }
                 do {
-//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     let result = try JSONDecoder().decode(SearchResultsResponse.self, from: data)
                     var searchResults: [SearchResult] = []
                     searchResults.append(contentsOf: result.tracks.items.compactMap({ .track(model: $0) }))

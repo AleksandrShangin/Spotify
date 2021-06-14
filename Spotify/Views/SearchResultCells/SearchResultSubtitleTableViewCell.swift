@@ -7,12 +7,17 @@
 
 import UIKit
 import SDWebImage
+import ColorCompatibility
 
 
+final class SearchResultSubtitleTableViewCell: UITableViewCell {
 
-class SearchResultSubtitleTableViewCell: UITableViewCell {
-
+    // MARK: - Properties
+    
     static let identifier = "SearchResultSubtitleTableViewCell"
+    
+    
+    // MARK: - UI
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -23,7 +28,7 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
     private let subtitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textColor = .secondaryLabel
+        label.textColor = ColorCompatibility.secondaryLabel
         return label
     }()
     
@@ -32,6 +37,9 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
+    
+    
+    // MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

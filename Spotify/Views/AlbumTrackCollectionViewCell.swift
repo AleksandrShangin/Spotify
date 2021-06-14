@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ColorCompatibility
 
 
 class AlbumTrackCollectionViewCell: UICollectionViewCell {
@@ -27,8 +28,8 @@ class AlbumTrackCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .secondarySystemBackground
-        contentView.backgroundColor = .secondarySystemBackground
+        backgroundColor = ColorCompatibility.secondarySystemBackground
+        contentView.backgroundColor = ColorCompatibility.secondarySystemBackground
         contentView.clipsToBounds = true
         contentView.addSubview(trackNameLabel)
         contentView.addSubview(artistNameLabel)

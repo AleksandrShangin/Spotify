@@ -7,6 +7,7 @@
 
 import UIKit
 import SafariServices
+import ColorCompatibility
 
 
 class SearchViewController: UIViewController, UISearchResultsUpdating, UISearchBarDelegate {
@@ -43,7 +44,7 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UISearchB
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorCompatibility.systemBackground
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self

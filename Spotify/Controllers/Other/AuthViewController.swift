@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+import ColorCompatibility
 
 
 class AuthViewController: UIViewController, WKNavigationDelegate {
@@ -28,9 +29,8 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = "Sign In"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorCompatibility.systemBackground
         webView.navigationDelegate = self
         view.addSubview(webView)
         guard let url = AuthManager.shared.signInURL else {

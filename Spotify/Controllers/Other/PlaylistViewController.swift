@@ -6,14 +6,22 @@
 //
 
 import UIKit
+import ColorCompatibility
 
-class PlaylistViewController: UIViewController {
 
+
+final class PlaylistViewController: UIViewController {
+
+    // MARK: - Properties
+    
     private let playlist: Playlist
     
     private var viewModels = [RecommendedTrackCellViewModel]()
     
     private var tracks = [AudioTrack]()
+    
+    
+    // MARK: - UI
     
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { (_, _) -> NSCollectionLayoutSection? in
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
@@ -27,6 +35,9 @@ class PlaylistViewController: UIViewController {
         return section
     }))
     
+    
+    // MARK: - Init
+    
     init(playlist: Playlist) {
         self.playlist = playlist
         super.init(nibName: nil, bundle: nil)
@@ -37,16 +48,18 @@ class PlaylistViewController: UIViewController {
     }
     
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = playlist.name
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorCompatibility.systemBackground
         view.addSubview(collectionView)
         collectionView.register(RecommendedTrackCollectionViewCell.self, forCellWithReuseIdentifier: RecommendedTrackCollectionViewCell.identifier)
         collectionView.register(PlaylistHeaderCollectionReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: PlaylistHeaderCollectionReusableView.identifier)
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = ColorCompatibility.systemBackground
         collectionView.dataSource = self
         collectionView.delegate = self
         APICaller.shared.getPlaylistDetails(for: playlist) { [weak self] (result) in
@@ -73,6 +86,14 @@ class PlaylistViewController: UIViewController {
                                                             action: #selector(didTapShare))
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.frame = view.bounds
+    }
+    
+    
+    // MARK: - Actions
+    
     @objc private func didTapShare() {
         guard let url = URL(string: playlist.external_urls.first?.value ?? "") else {
             return
@@ -83,14 +104,12 @@ class PlaylistViewController: UIViewController {
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true, completion: nil)
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        collectionView.frame = view.bounds
-    }
 
 }
 
+
+
+// MARK: - Extension for CollectionView Delegate
 
 extension PlaylistViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -134,6 +153,8 @@ extension PlaylistViewController: UICollectionViewDataSource, UICollectionViewDe
 }
 
 
+
+// MARK: - Extension for  PlaylistHeaderCollectionReusableViewDelegate
 
 extension PlaylistViewController: PlaylistHeaderCollectionReusableViewDelegate {
     func playlistHeaderCollectionReusableViewDidTapPlayAll(_ header: PlaylistHeaderCollectionReusableView) {

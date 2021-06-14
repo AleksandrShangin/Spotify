@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		DC40D5B2A6CB54730D8DDF85 /* Pods_Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 581EBB9BD267DDC8124BAAA0 /* Pods_Spotify.framework */; };
+		FA1C95FF26769C5B00B5A16C /* LibraryPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C95FE26769C5B00B5A16C /* LibraryPlaylistsViewController.swift */; };
+		FA1C960126769CB700B5A16C /* LibraryAlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C960026769CB700B5A16C /* LibraryAlbumsViewController.swift */; };
+		FA1C9603267737B200B5A16C /* LibraryToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C9602267737B200B5A16C /* LibraryToggleView.swift */; };
 		FA2B86952651980C00993280 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B86942651980C00993280 /* AlbumViewController.swift */; };
 		FA2B8697265248C200993280 /* AlbumDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B8696265248C200993280 /* AlbumDetailsResponse.swift */; };
 		FA2B869926525D2100993280 /* PlaylistDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B869826525D2100993280 /* PlaylistDetailsResponse.swift */; };
@@ -71,6 +74,9 @@
 		581EBB9BD267DDC8124BAAA0 /* Pods_Spotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8993ED8FB5AA40259ECCD268 /* Pods-Spotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotify.debug.xcconfig"; path = "Target Support Files/Pods-Spotify/Pods-Spotify.debug.xcconfig"; sourceTree = "<group>"; };
 		DA8859438CF500AC4C64D0FA /* Pods-Spotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotify.release.xcconfig"; path = "Target Support Files/Pods-Spotify/Pods-Spotify.release.xcconfig"; sourceTree = "<group>"; };
+		FA1C95FE26769C5B00B5A16C /* LibraryPlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryPlaylistsViewController.swift; sourceTree = "<group>"; };
+		FA1C960026769CB700B5A16C /* LibraryAlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryAlbumsViewController.swift; sourceTree = "<group>"; };
+		FA1C9602267737B200B5A16C /* LibraryToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryToggleView.swift; sourceTree = "<group>"; };
 		FA2B86942651980C00993280 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		FA2B8696265248C200993280 /* AlbumDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsResponse.swift; sourceTree = "<group>"; };
 		FA2B869826525D2100993280 /* PlaylistDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailsResponse.swift; sourceTree = "<group>"; };
@@ -161,6 +167,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FA1C95FD26769C0300B5A16C /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				FA1C95FE26769C5B00B5A16C /* LibraryPlaylistsViewController.swift */,
+				FA1C960026769CB700B5A16C /* LibraryAlbumsViewController.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 		FA39AA50263C64290086C2CD = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +229,7 @@
 				FA407D9C265807FB00199BFE /* AlbumTrackCollectionViewCell.swift */,
 				FA407DA0265971C900199BFE /* CategoryCollectionViewCell.swift */,
 				FA7B64C22663E4DB008FA072 /* PlayerControlsView.swift */,
+				FA1C9602267737B200B5A16C /* LibraryToggleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -319,6 +335,7 @@
 		FAF77EC1263C6A960091C9CB /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				FA1C95FD26769C0300B5A16C /* Library */,
 				FAF77EC2263C6ABB0091C9CB /* AuthViewController.swift */,
 				FAF77EC6263C6ACF0091C9CB /* WelcomeViewController.swift */,
 				FAF77EC9263C6AEE0091C9CB /* SettingsViewController.swift */,
@@ -452,6 +469,7 @@
 				FA5233F5264D836600CD2B92 /* NewReleaseCollectionViewCell.swift in Sources */,
 				FA5233F9264D840500CD2B92 /* RecommendedTrackCollectionViewCell.swift in Sources */,
 				FA5233FF264ED33B00CD2B92 /* RecommendedTrackCellViewModel.swift in Sources */,
+				FA1C960126769CB700B5A16C /* LibraryAlbumsViewController.swift in Sources */,
 				FA5233FD264ED29B00CD2B92 /* FeaturedPlaylistCellViewModel.swift in Sources */,
 				FAE930BB2646C41300BD3DA4 /* Constants.swift in Sources */,
 				FAF77EBB263C6A310091C9CB /* SearchViewController.swift in Sources */,
@@ -480,11 +498,13 @@
 				FAF77EC3263C6ABB0091C9CB /* AuthViewController.swift in Sources */,
 				FA39AA5D263C642A0086C2CD /* AppDelegate.swift in Sources */,
 				FAF77EEB263C6C910091C9CB /* UserProfile.swift in Sources */,
+				FA1C9603267737B200B5A16C /* LibraryToggleView.swift in Sources */,
 				FA5233F7264D83B900CD2B92 /* FeaturedPlaylistCollectionViewCell.swift in Sources */,
 				FAF77EEE263C89DD0091C9CB /* Extensions.swift in Sources */,
 				FA407DA3265AE2F700199BFE /* AllCategoriesResponse.swift in Sources */,
 				FA7B64BE2662BC35008FA072 /* SearchResultSubtitleTableViewCellViewModel.swift in Sources */,
 				FAF77EBE263C6A5A0091C9CB /* LibraryViewController.swift in Sources */,
+				FA1C95FF26769C5B00B5A16C /* LibraryPlaylistsViewController.swift in Sources */,
 				FAA5AFFA265E75CD0065199E /* SearchResult.swift in Sources */,
 				FA82E5682656C8A0008AE398 /* PlaylistHeaderViewModel.swift in Sources */,
 				FAF77EE8263C6C7D0091C9CB /* Artist.swift in Sources */,
@@ -642,6 +662,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 573CM7Y6R3;
 				INFOPLIST_FILE = Spotify/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -662,6 +683,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 573CM7Y6R3;
 				INFOPLIST_FILE = Spotify/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

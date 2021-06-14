@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import ColorCompatibility
+
 
 
 struct SearchSection {
@@ -20,15 +22,20 @@ protocol SearchResultsViewControllerDelegate: AnyObject {
 
 
 
-class SearchResultsViewController: UIViewController {
+final class SearchResultsViewController: UIViewController {
+    
+    // MARK: - Properties
     
     weak var delegate: SearchResultsViewControllerDelegate?
     
     private var sections = [SearchSection]()
     
+    
+    // MARK: - UI
+    
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.backgroundColor = .systemBackground
+        tableView.backgroundColor = ColorCompatibility.systemBackground
         tableView.register(SearchResultDefaultTableViewCell.self,
                            forCellReuseIdentifier: SearchResultDefaultTableViewCell.identifier)
         tableView.register(SearchResultSubtitleTableViewCell.self,
@@ -36,6 +43,9 @@ class SearchResultsViewController: UIViewController {
         tableView.isHidden = true
         return tableView
     }()
+    
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +99,8 @@ class SearchResultsViewController: UIViewController {
 }
 
 
+
+// MARK: - Extension for TableView Methods
 
 extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegate {
     

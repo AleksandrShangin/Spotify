@@ -12,7 +12,11 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
     
     private let albumCoverImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "photo")
+        if #available(iOS 13.0, *) {
+            imageView.image = UIImage(systemName: "photo")
+        } else {
+            // Fallback on earlier versions
+        }
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
