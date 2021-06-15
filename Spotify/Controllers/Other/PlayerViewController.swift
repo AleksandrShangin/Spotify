@@ -63,7 +63,6 @@ final class PlayerViewController: UIViewController {
     }
     
     
-    @available(iOS 13.0, *)
     private func configureBarButtons() {
         let leftBarButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didTapClose))
         navigationItem.leftBarButtonItem = leftBarButton

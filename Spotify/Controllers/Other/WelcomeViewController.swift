@@ -9,8 +9,7 @@ import UIKit
 
 
 
-@available(iOS 14.0, *)
-class WelcomeViewController: UIViewController {
+final class WelcomeViewController: UIViewController {
 
     // MARK: - UI
     

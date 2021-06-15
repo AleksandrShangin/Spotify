@@ -10,7 +10,8 @@ import WebKit
 import ColorCompatibility
 
 
-class AuthViewController: UIViewController, WKNavigationDelegate {
+
+final class AuthViewController: UIViewController, WKNavigationDelegate {
 
     
     private let webView: WKWebView = {
@@ -19,7 +20,6 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
         let config = WKWebViewConfiguration()
         config.defaultWebpagePreferences = prefs
         let webView = WKWebView(frame: .zero, configuration: config)
-        
         return webView
     }()
     

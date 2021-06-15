@@ -7,16 +7,25 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+
+final class SettingsViewController: UIViewController {
+
+    // MARK: - Properties
+    
+    private var sections = [Section]()
+    
+    
+    // MARK: - UI
+    
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         return tableView
     }()
     
-    private var sections = [Section]()
     
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +36,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         tableView.delegate = self
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+    }
+    
+    
+    // MARK: - Private Methods
     
     private func configureModels() {
         sections.append(Section(title: "Profile", options: [Option(title: "View Your Profile", handler: { [weak self] in
@@ -52,13 +69,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
-    }
     
-    
-    // MARK: - TableView
+}
+
+
+
+
+// MARK: - TableView Methods
+
+extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -89,7 +108,4 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
 }
-
-
-
 

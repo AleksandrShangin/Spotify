@@ -11,8 +11,15 @@ import ColorCompatibility
 
 
 
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+final class ProfileViewController: UIViewController {
 
+    // MARK: - Properties
+    
+    private var models = [String]()
+    
+    
+    // MARK: - UI
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.isHidden = true
@@ -20,8 +27,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         return tableView
     }()
     
-    private var models = [String]()
     
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +44,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
+    
+    
+    // MARK: - Private Methods
     
     private func fetchProfile() {
         APICaller.shared.getCurrentUserProfile { [weak self] result in
@@ -90,7 +100,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
-    // MARK: - TableView
+}
+
+
+
+// MARK: - TableView Methods
+
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return models.count
@@ -103,6 +119,5 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.textLabel?.text = models[indexPath.row]
         return cell
     }
-    
     
 }
