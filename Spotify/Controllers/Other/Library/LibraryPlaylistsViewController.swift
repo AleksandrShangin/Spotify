@@ -15,6 +15,8 @@ class LibraryPlaylistsViewController: UIViewController {
     
     private var playlists = [Playlist]()
     
+    public var selectionHandler: ((Playlist) -> Void)?
+    
     // MARK: - UI
     
     private let noPlaylistsView = ActionLabelView()
@@ -35,7 +37,10 @@ class LibraryPlaylistsViewController: UIViewController {
         setupNoPlaylistsView()
         setupTableView()
         fetchData()
-        print(playlists)
+        
+        if selectionHandler != nil {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didTapClose))
+        }
     }
     
     private func setupNoPlaylistsView() {
@@ -57,7 +62,6 @@ class LibraryPlaylistsViewController: UIViewController {
                 switch result {
                 case .success(let playlists):
                     self?.playlists = playlists
-                    print(playlists)
                     self?.updateUI()
                 case .failure(let error):
                     print(error)
@@ -108,6 +112,10 @@ class LibraryPlaylistsViewController: UIViewController {
         }))
         present(alert, animated: true, completion: nil)
     }
+    
+    @objc private func didTapClose() {
+        self.dismiss(animated: true, completion: nil)
+    }
 
 }
 
@@ -127,6 +135,21 @@ extension LibraryPlaylistsViewController: UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let playlist = playlists[indexPath.row]
+        
+        guard selectionHandler == nil else {
+            selectionHandler?(playlist)
+            dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        let vc = PlaylistViewController(playlist: playlist)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
