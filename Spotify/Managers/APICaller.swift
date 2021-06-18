@@ -157,8 +157,16 @@ final class APICaller {
         }
     }
     
-    public func removeTrackFromPlaylist(track: AudioTrack, playlistId: String, completion: @escaping (Bool) -> Void) {
-        createRequest(with: URL(string: Constants.baseAPIURL+"/playlists"+"/\(playlistId)"+"tracks"), type: .DELETE) { request in
+    public func removeTrackFromPlaylist(track: AudioTrack, playlist: Playlist, completion: @escaping (Bool) -> Void) {
+        createRequest(with: URL(string: Constants.baseAPIURL+"/playlists/\(playlist.id)/tracks"), type: .DELETE) { baseRequest in
+            var request = baseRequest
+            let json = [
+                "tracks": [
+                    ["uri": "spotify:track:\(track.id)"]
+                ]
+            ]
+            request.httpBody = try? JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
                     completion(false)
