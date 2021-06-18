@@ -42,6 +42,9 @@ class ActionLabelView: UIView {
         return button
     }()
     
+    
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         clipsToBounds = true

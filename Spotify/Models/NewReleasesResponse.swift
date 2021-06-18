@@ -18,7 +18,7 @@ struct AlbumsResponse: Codable {
 }
 
 struct Album: Codable {
-    let album_type: String
+    let album_type: String?
     let artists: [Artist]
     let available_markets: [String]
     let id: String
