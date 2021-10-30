@@ -7,10 +7,7 @@
 
 import Foundation
 
-
-
 final class APICaller {
-    
     
     static let shared = APICaller()
     
@@ -23,9 +20,6 @@ final class APICaller {
     enum APIError: Error {
         case failedToGetData
     }
-    
-    
-    
     
     // MARK: - Albums
     

@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 final class HapticsManager {
     
     static let shared = HapticsManager()
@@ -30,5 +28,6 @@ final class HapticsManager {
             generator.notificationOccurred(type)
         }
     }
+    
 }
  

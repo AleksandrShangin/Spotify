@@ -20,10 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AuthManager.shared.refreshIfNeeded(completion: nil)
             window.rootViewController = TabBarViewController()
         } else {
-            let navVC = UINavigationController(rootViewController: WelcomeViewController())
-            navVC.navigationBar.prefersLargeTitles = true
-            navVC.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
-            window.rootViewController = navVC
+            let navigationController = UINavigationController(rootViewController: WelcomeViewController())
+            navigationController.navigationBar.prefersLargeTitles = true
+            navigationController.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
+            window.rootViewController = navigationController
         }
         
         window.makeKeyAndVisible()
