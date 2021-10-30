@@ -151,7 +151,7 @@ final class HomeViewController: UIViewController {
             }
         }
         group.notify(queue: .main) {
-            guard let newAlbums = newReleases?.albums.items,
+            guard let newAlbums = newReleases?.albums?.items,
                   let playlists = featuredPlaylist?.playlists.items,
                   let tracks = recommendations?.tracks else {
                 return

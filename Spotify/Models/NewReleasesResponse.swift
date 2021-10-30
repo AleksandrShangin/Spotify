@@ -9,7 +9,7 @@ import Foundation
 
 
 struct NewReleasesResponse: Codable {
-    let albums: AlbumsResponse
+    let albums: AlbumsResponse?
     
 }
 

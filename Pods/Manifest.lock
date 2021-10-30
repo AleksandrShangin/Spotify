@@ -1,5 +1,4 @@
 PODS:
-  - Appirater (2.3.1)
   - ColorCompatibility (1.1.0)
   - Firebase/Analytics (7.7.0):
     - Firebase/Core
@@ -69,14 +68,12 @@ PODS:
   - SDWebImage/Core (5.10.4)
 
 DEPENDENCIES:
-  - Appirater
   - ColorCompatibility
   - Firebase/Analytics
   - SDWebImage
 
 SPEC REPOS:
   trunk:
-    - Appirater
     - ColorCompatibility
     - Firebase
     - FirebaseAnalytics
@@ -91,7 +88,6 @@ SPEC REPOS:
     - SDWebImage
 
 SPEC CHECKSUMS:
-  Appirater: 44a4651f7912a17dc906b655f0c215d5bb768b84
   ColorCompatibility: 7257750b5ac742db9c8b593966c6f8e06992149b
   Firebase: cd2ab85eec8170dc260186159f21072ecb679ad5
   FirebaseAnalytics: f3f8f75de34fe04141a69bb1c4bd7e24a80178e1
@@ -105,6 +101,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
 
-PODFILE CHECKSUM: 403fb068ff4c8cb21ef7fe8dbb7db96820f090b7
+PODFILE CHECKSUM: abbbb693ae48e080d7c831f281ba22072308e5fd
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

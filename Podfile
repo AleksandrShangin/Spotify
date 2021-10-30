@@ -1,14 +1,25 @@
-# Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
+use_frameworks!
+
+def firebase_pods
+    pod 'Firebase/Analytics'
+end
+
+def network_pods
+    pod 'SDWebImage'
+end
+
+def ui_pods
+    pod 'ColorCompatibility' 
+end
+
+def target_pods
+    firebase_pods  
+    network_pods
+    ui_pods
+end
+
 target 'Spotify' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for Spotify
-  pod 'SDWebImage'
-  pod 'Appirater'
-  pod 'Firebase/Analytics'  
-  pod 'ColorCompatibility' 
-
+    target_pods
 end
