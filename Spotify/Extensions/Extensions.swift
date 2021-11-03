@@ -25,6 +25,32 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    func presentAlert(title: String,
+                      message: String,
+                      confirmTitle: String,
+                      cancelTitle: String,
+                      confirmHandler: (() -> Void)? = nil,
+                      cancelHandler: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: confirmTitle, style: .default, handler: { _ in
+            confirmHandler?()
+        }))
+        alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: { _ in
+            cancelHandler?()
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+}
+
+extension UITableView {
+    
+    func registerCell(_ cell: UITableViewCell.Type) {
+        self.register(cell, forCellReuseIdentifier: String(describing: cell))
+        print("Cell Type: \(cell), Cell Id: \(String(describing: cell))")
+//        self.register(cell(), forCellReuseIdentifier: "")
+    }
+    
 }
 
 extension UIView {

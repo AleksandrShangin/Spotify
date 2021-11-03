@@ -26,7 +26,6 @@ final class LibraryAlbumsViewController: UIViewController {
         return tableView
     }()
     
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {

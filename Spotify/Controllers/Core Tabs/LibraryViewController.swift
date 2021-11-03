@@ -6,14 +6,13 @@
 //
 
 import UIKit
-import ColorCompatibility
 
 final class LibraryViewController: UIViewController {
 
     // MARK: - Properties
     
-    private let playlistsVC = LibraryPlaylistsViewController()
-    private let albumsVC = LibraryAlbumsViewController()
+    private let playlistsViewController = LibraryPlaylistsViewController()
+    private let albumsViewController = LibraryAlbumsViewController()
     
     // MARK: - UI
     
@@ -29,16 +28,11 @@ final class LibraryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = ColorCompatibility.systemBackground
-        view.addSubview(toggleView)
-        toggleView.delegate = self
-        view.addSubview(scrollView)
-        scrollView.delegate = self
-        
-        scrollView.contentSize = CGSize(width: view.width*2, height: scrollView.height)
+        view.backgroundColor = .systemBackground
+        setupToggleView()
+        setupScrollView()
         addChildren()
         updateBarButtons()
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -52,16 +46,27 @@ final class LibraryViewController: UIViewController {
     
     // MARK: - Setup
     
+    private func setupToggleView() {
+        view.addSubview(toggleView)
+        toggleView.delegate = self
+    }
+    
+    private func setupScrollView() {
+        view.addSubview(scrollView)
+        scrollView.delegate = self
+        scrollView.contentSize = CGSize(width: view.width*2, height: scrollView.height)
+    }
+    
     private func addChildren() {
-        addChild(playlistsVC)
-        scrollView.addSubview(playlistsVC.view)
-        playlistsVC.view.frame = CGRect(x: 0, y: 0, width: scrollView.width, height: scrollView.height)
-        playlistsVC.didMove(toParent: self)
+        addChild(playlistsViewController)
+        scrollView.addSubview(playlistsViewController.view)
+        playlistsViewController.view.frame = CGRect(x: 0, y: 0, width: scrollView.width, height: scrollView.height)
+        playlistsViewController.didMove(toParent: self)
         
-        addChild(albumsVC)
-        scrollView.addSubview(albumsVC.view)
-        albumsVC.view.frame = CGRect(x: view.width, y: 0, width: scrollView.width, height: scrollView.height)
-        albumsVC.didMove(toParent: self)
+        addChild(albumsViewController)
+        scrollView.addSubview(albumsViewController.view)
+        albumsViewController.view.frame = CGRect(x: view.width, y: 0, width: scrollView.width, height: scrollView.height)
+        albumsViewController.didMove(toParent: self)
         
     }
     
@@ -80,7 +85,7 @@ final class LibraryViewController: UIViewController {
     // MARK: - Actions
     
     @objc private func didTapAdd() {
-        playlistsVC.showCreatePlaylistAlert()
+        playlistsViewController.showCreatePlaylistAlert()
     }
 
 }

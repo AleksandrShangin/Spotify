@@ -7,7 +7,6 @@
 
 import UIKit
 import SDWebImage
-import ColorCompatibility
 
 protocol PlayerViewControllerDelegate: AnyObject {
     func didTapPlayPause()
@@ -37,7 +36,7 @@ final class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = ColorCompatibility.systemBackground
+        view.backgroundColor = .systemBackground
         view.addSubview(imageView)
         view.addSubview(controlsView)
         configureBarButtons()

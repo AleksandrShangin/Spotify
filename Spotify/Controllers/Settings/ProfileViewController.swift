@@ -7,7 +7,6 @@
 
 import UIKit
 import SDWebImage
-import ColorCompatibility
 
 final class ProfileViewController: UIViewController {
 
@@ -29,7 +28,7 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Profile"
-        view.backgroundColor = ColorCompatibility.systemBackground
+        view.backgroundColor = .systemBackground
         setupTableView()
         fetchProfile()
     }
@@ -94,7 +93,7 @@ final class ProfileViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.text = "Failed to load profile."
         label.sizeToFit()
-        label.textColor = ColorCompatibility.secondaryLabel
+        label.textColor = .secondaryLabel
         view.addSubview(label)
         label.center = view.center
     }

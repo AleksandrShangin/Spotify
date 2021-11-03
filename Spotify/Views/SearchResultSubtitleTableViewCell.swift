@@ -7,8 +7,6 @@
 
 import UIKit
 import SDWebImage
-import ColorCompatibility
-
 
 final class SearchResultSubtitleTableViewCell: UITableViewCell {
 
@@ -27,7 +25,7 @@ final class SearchResultSubtitleTableViewCell: UITableViewCell {
     private let subtitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textColor = ColorCompatibility.secondaryLabel
+        label.textColor = .secondaryLabel
         return label
     }()
     

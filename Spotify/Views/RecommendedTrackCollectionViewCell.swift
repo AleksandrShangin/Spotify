@@ -7,16 +7,17 @@
 
 import UIKit
 
-class RecommendedTrackCollectionViewCell: UICollectionViewCell {
+final class RecommendedTrackCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
+    
     static let identifier = "RecommendedTrackCollectionViewCell"
+    
+    // MARK: - UI
     
     private let albumCoverImageView: UIImageView = {
         let imageView = UIImageView()
-        if #available(iOS 13.0, *) {
-            imageView.image = UIImage(systemName: "photo")
-        } else {
-            // Fallback on earlier versions
-        }
+        imageView.image = UIImage(systemName: "photo")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -34,6 +35,8 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 15, weight: .thin)
         return label
     }()
+    
+    // MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,7 +72,9 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         albumCoverImageView.image = nil
     }
     
-    func configure(with viewModel: RecommendedTrackCellViewModel) {
+    // MARK: - Public Methods
+    
+    public func configure(with viewModel: RecommendedTrackCellViewModel) {
         trackNameLabel.text = viewModel.name
         artistNameLabel.text = viewModel.artistName
         albumCoverImageView.sd_setImage(with: viewModel.artworkURL, completed: nil)

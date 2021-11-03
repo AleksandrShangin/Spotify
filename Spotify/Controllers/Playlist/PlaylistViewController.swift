@@ -87,13 +87,7 @@ final class PlaylistViewController: UIViewController {
                 case .success(let model):
                     strongSelf.tracks = model.tracks.items.compactMap({ $0.track })
                     // RecommendedTrackCellViewModel
-                    strongSelf.viewModels = model.tracks.items.compactMap({
-                        RecommendedTrackCellViewModel(
-                            name: $0.track.name,
-                            artistName: $0.track.artists.first?.name ?? "-",
-                            artworkURL: URL(string: $0.track.album?.images.first?.url ?? "")
-                        )
-                    })
+                    strongSelf.viewModels = model.tracks.items.compactMap({ RecommendedTrackCellViewModel(track: $0.track) })
                     strongSelf.collectionView.reloadData()
                 case .failure(let error):
                     strongSelf.showErrorMessage(error.localizedDescription)

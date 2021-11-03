@@ -7,18 +7,18 @@
 
 import UIKit
 import SDWebImage
-import ColorCompatibility
 
-class NewReleaseCollectionViewCell: UICollectionViewCell {
+final class NewReleaseCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
+    
     static let identifier = "NewReleaseCollectionViewCell"
+    
+    // MARK: - UI
     
     private let albumCoverImageView: UIImageView = {
         let imageView = UIImageView()
-        if #available(iOS 13.0, *) {
-            imageView.image = UIImage(systemName: "photo")
-        } else {
-            // Fallback on earlier versions
-        }
+        imageView.image = UIImage(systemName: "photo")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -44,9 +44,11 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = ColorCompatibility.secondarySystemBackground
+        contentView.backgroundColor = .secondarySystemBackground
         contentView.clipsToBounds = true
         contentView.addSubview(albumCoverImageView)
         contentView.addSubview(albumNameLabel)
@@ -62,7 +64,7 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         let imageSize: CGFloat = contentView.height-10
         let albumLabelSize = albumNameLabel.sizeThatFits(CGSize(width: contentView.width-imageSize-10,
-                                                           height: contentView.height-10))
+                                                                height: contentView.height-10))
         artistNameLabel.sizeToFit()
         numberOfTracksLabel.sizeToFit()
         
@@ -82,7 +84,6 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
                                            y: contentView.bottom-44,
                                            width: numberOfTracksLabel.width,
                                            height: 44)
-        
     }
     
     override func prepareForReuse() {
@@ -93,10 +94,12 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         albumCoverImageView.image = nil
     }
     
-    func configure(with viewModel: NewReleasesCellViewModel) {
+    // MARK: - Public Methods
+    
+    public func configure(with viewModel: AlbumViewModel) {
         albumNameLabel.text = viewModel.name
         artistNameLabel.text = viewModel.artistName
-        numberOfTracksLabel.text = "Tracks: \(viewModel.numberOfTracks)"
+        numberOfTracksLabel.text = viewModel.tracksLabel
         albumCoverImageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
     }
     

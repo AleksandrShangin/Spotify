@@ -6,12 +6,6 @@
 //
 
 import UIKit
-import ColorCompatibility
-
-struct SearchSection {
-    let title: String
-    let results: [SearchResult]
-}
 
 protocol SearchResultsViewControllerDelegate: AnyObject {
     func didTapResult(_ result: SearchResult)
@@ -29,7 +23,7 @@ final class SearchResultsViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.backgroundColor = ColorCompatibility.systemBackground
+        tableView.backgroundColor = .systemBackground
         tableView.register(SearchResultDefaultTableViewCell.self,
                            forCellReuseIdentifier: SearchResultDefaultTableViewCell.identifier)
         tableView.register(SearchResultSubtitleTableViewCell.self,
@@ -159,7 +153,6 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
             cell.configure(with: viewModel)
             return cell
         }
-
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

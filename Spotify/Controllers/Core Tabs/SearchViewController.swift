@@ -7,9 +7,8 @@
 
 import UIKit
 import SafariServices
-import ColorCompatibility
 
-final class SearchViewController: UIViewController, UISearchResultsUpdating, UISearchBarDelegate {
+final class SearchViewController: UIViewController {
 
     // MARK: - Properties
     
@@ -47,24 +46,12 @@ final class SearchViewController: UIViewController, UISearchResultsUpdating, UIS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = ColorCompatibility.systemBackground
+        view.backgroundColor = .systemBackground
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
         setupCollectionView()
-        
-        APICaller.shared.getCategories { [weak self] result in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let categories):
-                    strongSelf.categories = categories
-                    strongSelf.collectionView.reloadData()
-                case .failure(let error):
-                    strongSelf.showErrorMessage(error.localizedDescription)
-                }
-            }
-        }
+        fetchCategories()
     }
     
     override func viewDidLayoutSubviews() {
@@ -81,6 +68,28 @@ final class SearchViewController: UIViewController, UISearchResultsUpdating, UIS
         collectionView.dataSource = self
     }
     
+    // MARK: - Fetch Data
+    
+    private func fetchCategories() {
+        APICaller.shared.getCategories { [weak self] result in
+            guard let strongSelf = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let categories):
+                    strongSelf.categories = categories
+                    strongSelf.collectionView.reloadData()
+                case .failure(let error):
+                    strongSelf.showErrorMessage(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+}
+
+// MARK: - Extension for SearchResultsViewControllerDelegate
+
+extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let resultsController = searchController.searchResultsController as? SearchResultsViewController,
@@ -103,15 +112,14 @@ final class SearchViewController: UIViewController, UISearchResultsUpdating, UIS
         }
     }
     
+    func updateSearchResults(for searchController: UISearchController) {}
     
-    func updateSearchResults(for searchController: UISearchController) {
-
-    }
-
 }
 
+// MARK: - Extension for SearchResultsViewControllerDelegate
 
 extension SearchViewController: SearchResultsViewControllerDelegate {
+    
     func didTapResult(_ result: SearchResult) {
         switch result {
         case .artist(let model):

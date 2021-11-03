@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct PlaylistHeaderViewModel {
     let name: String?
     let description: String?

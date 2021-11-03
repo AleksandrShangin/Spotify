@@ -103,9 +103,7 @@ extension CategoryViewController: UICollectionViewDelegate, UICollectionViewData
             return UICollectionViewCell()
         }
         let playlist = playlists[indexPath.row]
-        cell.configure(with: FeaturedPlaylistCellViewModel(name: playlist.name,
-                                                           artworkURL: URL(string: playlist.images.first?.url ?? ""),
-                                                           creatorName: playlist.owner.display_name))
+        cell.configure(with: FeaturedPlaylistCellViewModel(playlist: playlist))
         return cell
     }
     

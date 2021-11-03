@@ -7,23 +7,6 @@
 
 import UIKit
 
-enum BrowseSectionType {
-    case newReleases(viewModels: [NewReleasesCellViewModel]) // 1
-    case featuredPlaylists(viewModels: [FeaturedPlaylistCellViewModel]) // 2
-    case recommendedTracks(viewModels: [RecommendedTrackCellViewModel]) // 3
-    
-    var title: String {
-        switch self {
-        case .newReleases:
-            return "New Released Albums"
-        case .featuredPlaylists:
-            return "Featured Playlists"
-        case .recommendedTracks:
-            return "Recommended"
-        }
-    }
-}
-
 final class HomeViewController: UIViewController {
     
     // MARK: - Properties
@@ -158,23 +141,21 @@ final class HomeViewController: UIViewController {
             }
             self.configureModels(newAlbums: newAlbums, playlists: playlists, tracks: tracks)
         }
-        
     }
     
     private func configureModels(newAlbums: [Album], playlists: [Playlist], tracks: [AudioTrack]) {
-        // Configure Models
         self.newAlbums = newAlbums
         self.playlists = playlists
         self.tracks = tracks
         
         sections.append(.newReleases(viewModels: newAlbums.compactMap({
-            return NewReleasesCellViewModel(name: $0.name, artworkURL: URL(string: $0.images.first?.url ?? ""), numberOfTracks: $0.total_tracks, artistName: $0.artists.first?.name ?? "-")
+            return AlbumViewModel(album: $0)
         })))
         sections.append(.featuredPlaylists(viewModels: playlists.compactMap({
-            return FeaturedPlaylistCellViewModel(name: $0.name, artworkURL: URL(string: $0.images.first?.url ?? ""), creatorName: $0.owner.display_name)
+            return FeaturedPlaylistCellViewModel(playlist: $0)
         })))
         sections.append(.recommendedTracks(viewModels: tracks.compactMap({
-            return RecommendedTrackCellViewModel(name: $0.name, artistName: $0.artists.first?.name ?? "-", artworkURL: URL(string: $0.album?.images.first?.url ?? ""))
+            return RecommendedTrackCellViewModel(track: $0)
         })))
         collectionView.reloadData()
     }
@@ -189,9 +170,7 @@ final class HomeViewController: UIViewController {
     }
     
     @objc private func didLongPress(_ gesture: UILongPressGestureRecognizer) {
-        guard gesture.state == .began else {
-            return
-        }
+        guard gesture.state == .began else { return }
         let touchPoint = gesture.location(in: collectionView)
         guard let indexPath = collectionView.indexPathForItem(at: touchPoint), indexPath.section == 2 else {
             return
@@ -201,20 +180,20 @@ final class HomeViewController: UIViewController {
         let actionSheet = UIAlertController(title: model.name, message: "Would you like to add this to a playlist?", preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         actionSheet.addAction(UIAlertAction(title: "Add to playlist", style: .default, handler: { [weak self] _ in
+            guard let strongSelf = self else { return }
             DispatchQueue.main.async {
                 let libraryPlaylistsViewController = LibraryPlaylistsViewController()
                 libraryPlaylistsViewController.selectionHandler = { playlist in
                     APICaller.shared.addTrackToPlaylist(track: model, playlist: playlist) { success in
                         if success {
-                            print("Successfully added")
-                            self?.presentAlert(title: "Successfully added to playlist")
+                            strongSelf.presentAlert(title: "Successfully added to playlist")
                         } else {
-                            self?.showErrorMessage("Something went wrong")
+                            strongSelf.showErrorMessage("Something went wrong")
                         }
                     }
                 }
                 libraryPlaylistsViewController.title = "Select Playlist"
-                self?.present(UINavigationController(rootViewController: libraryPlaylistsViewController), animated: true, completion: nil)
+                strongSelf.present(UINavigationController(rootViewController: libraryPlaylistsViewController), animated: true)
             }
         }))
         present(actionSheet, animated: true, completion: nil)
@@ -308,7 +287,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
 }
 
-
+// MARK: - Extension for NSCollectionLayoutSection
 
 extension HomeViewController {
     

@@ -17,7 +17,6 @@ struct AlbumDetailsResponse: Codable {
     let label: String
     let name: String
     let tracks: TracksResponse
-    
 }
  
 struct TracksResponse: Codable {

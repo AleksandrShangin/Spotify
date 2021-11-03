@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct PlaylistDetailsResponse: Codable {
     let description: String
     let external_urls: [String: String]
